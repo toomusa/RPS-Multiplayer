@@ -1,15 +1,70 @@
 #heading {
-
+    background-color: darkgray;
+    text-align: center;
 }
 
 #footing {
-
+    background-color: darkgray;
 }
 
 #main {
-
+    background-color: yellow;
 }
 
 #spacer {
-    
+    background-color: gray;
+}
+
+#play-buttons {
+    background-color: burlywood;
+}
+
+#marquee {
+    background-color: green;
+}
+
+#lobby {
+    background-color: red;
+    text-align: center;
+}
+
+#player-area {
+    text-align: center;
+}
+
+#opponent-area {
+    text-align: center;
+}
+
+.roundbtn {
+    border-radius: 50%;
+    font-size: 18px;
+    height: 60px;
+    width: 100px;
+    margin: 15px 3px 15px 3px;
+}
+
+.gamebtn {
+    border-radius: 50%;
+    font-size: 18px;
+    height: 60px;
+    width: 150px;
+    margin: 15px 3px 15px 3px;
+}
+
+#play-buttons {
+    text-align: center;
+}
+
+#marquee-box {
+    height: 150px;
+    max-height: 150px;
+    min-height: 150px;
+    overflow-y: auto;
+    text-align: center;
+    background-color: white;
+}
+
+#waiting-room {
+    background-color: white;
 }

@@ -9,9 +9,12 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="./assets/css/style.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather&display=swap">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" 
-    integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-database.js"></script>
+  <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css">  
 
   <title>Document</title>
 </head>
@@ -22,19 +25,92 @@
     <div class="row">
       <div class="col-sm-12 col-xs-12 col-md-12" id="heading">
         <!-- header row -->
+        <h1>Rock - Paper - Scissors</h1>
+        <h2>Press R, S, or P to play!</h2>
       </div>
     </div>
   
     <div class="row">
-      <div class="col-sm-3 col-xs-1 col-md-4" id="spacer">
+      <div class="col-sm-1 col-xs-1 col-md-1" id="spacer">
         <!-- left-side spacer -->
       </div>
-
-      <div class="col-sm-6 col-xs-10 col-md-4" id="main">
-        <!-- main content area -->
+      <div class="col-sm-3 col-xs-1 col-md-3" id="player-area">
+        <!-- player area -->
+        <div class="card" style="width: 100%">
+          <h4 id="player-name">Player Name</h4>
+          <img class="card-img-top" src="./assets/images/userRock.png" id="player-image">
+          <div class="card-body">
+            <h5 class="card-title" id="player-choice">Rock</h5>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Wins: <span id="player-wins"> </span></li>
+            <li class="list-group-item">Losses: <span id="player-losses"> </span></li>
+            <li class="list-group-item">Games: <span id="player-games"> </span></li>
+            <li class="list-group-item">Analytics: <span id="player-analytics"> </span></li>
+          </ul>
+        </div>
       </div>
+      <div class="col-sm-4 col-xs-10 col-md-4" id="main">
+        <!-- main content area -->
+        <div class="row" id="play-buttons">
+          <div class="col-sm-12 col-cs-12 col-md-12">
+            <div class="container" id="login">
+              <input id="txtUsername" type="text" placeholder="username">
+              <button class="btn btn-action" id="btnLogin">Log in</button>
+              <button class="btn btn-action disabled" id="btnLogout">Log out</button>
+            </div>
+            <div>
+              <button class="btn btn-danger roundbtn" id="rock-button">Rock</button>
+              <button class="btn btn-success roundbtn" id="paper-button">Paper</button>
+              <button class="btn btn-primary roundbtn" id="scissors-button">Scissors</button>
+            </div>
 
-      <div class="col-sm-3 col-xs-1 col-md-4" id="spacer">
+          </div>
+        </div>
+        <div class="row" id="marquee">
+          <div class="col-sm-12 col-cs-12 col-md-12">
+              <div id="marquee-box"> 
+                  <span style="color: green">You chose: <span id="result-player-choice"></span></span><br>
+                  <span style="color: red">Computer chose: <span id="result-cpu-choice"></span></span><br>
+                  <span>Your Score: <span id="result-players-score">0</span></span><br>
+                  <span>Computer's Score: <span id="result-cpu-score">0</span></span><br>
+                  <span>Ties: <span id="result-game-ties">0</span></span><br>
+              </div>
+          </div>
+        </div>
+        <div class="row" id="lobby">
+          <div class="col-sm-12 col-cs-12 col-md-12">
+            <div>
+              <h5>Players online now</h5>
+              <div id="waiting-room"> 
+                <div>Player 1</div>
+                <div>Player 2</div>
+                <div>Player 3</div>
+              </div>
+              <div id="game-buttons">
+                <button class="btn btn-warning gamebtn">Join Game</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3 col-xs-1 col-md-3" id="opponent-area">
+        <!-- opponent area -->
+        <div class="card" style="width: 100%">
+          <h4 id="opponent-name">Opponent Name</h4>
+          <img class="card-img-top" src="./assets/images/cpuScissors.png" id="opponent-image">
+          <div class="card-body">
+            <h5 class="card-title" id="opponent-choice">Scissors</h5>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Wins: <span id="opponent-wins"> </span></li>
+            <li class="list-group-item">Losses: <span id="opponent-losses"> </span></li>
+            <li class="list-group-item">Games: <span id="opponent-games"> </span></li>
+            <li class="list-group-item">Analytics: <span id="opponent-analytics"> </span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-sm-1 col-xs-1 col-md-1" id="spacer">
         <!-- right-side spacer -->
       </div>
     </div>
