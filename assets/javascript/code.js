@@ -60,6 +60,10 @@ btnLogin.addEventListener("click", function() {
       });
 })
 
+btnLogout.addEventListener("click", function() {
+    auth.signOut();
+})
+
 auth.onAuthStateChanged(firebaseUser => {
     console.log(firebaseUser);
     if(firebaseUser) {
